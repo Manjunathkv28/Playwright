@@ -14,11 +14,12 @@ test("login", async ({ page }) => {
   await home.addProduct("Nexus 6");
 
   const cart = new Cartpage(page);
-  cart.viewCart();
+  await cart.viewCart();
   await page.waitForTimeout(5000);
 
-  await cart.checkAddedProduct("Nexus hasdj6");
+  await cart.checkAddedProduct("Nexus 6");
 
-  // await home.openMobiles();
-  // await home.adds6ToCart();
+  await login.logout();
+  expect(await login.isLoggedOut()).toBeTruthy();
+
 });

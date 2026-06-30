@@ -2,7 +2,7 @@ export class LoginPage {
   constructor(page) {
     this.page = page;
 
-    // Locators added from github
+    // Locators  from github
     this.usernameInput = page.locator("#loginusername");
     this.passwordInput = page.locator("#loginpassword");
     this.loginButton = page.locator(
@@ -10,6 +10,8 @@ export class LoginPage {
     );
     this.errorMessage = page.locator(".error-message");
     this.loginLink = page.locator("#login2");
+    this.logoutLink = page.locator("#logout2");
+    this.welcomeUser = page.locator("#nameofuser");
   }
 
   async login(username, password) {
@@ -17,6 +19,18 @@ export class LoginPage {
     await this.enterUsername(username);
     await this.enterPassword(password);
     await this.clickLogin();
+  }
+
+  async logout() {
+    await this.logoutLink.click();
+  }
+
+  async isLoggedIn() {
+    return await this.welcomeUser.isVisible();
+  }
+
+  async isLoggedOut() {
+    return await this.loginLink.isVisible();
   }
 
   // Actions
